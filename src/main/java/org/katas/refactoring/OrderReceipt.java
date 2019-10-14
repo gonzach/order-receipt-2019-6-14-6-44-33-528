@@ -15,6 +15,8 @@ public class OrderReceipt {
 
     public String printReceipt() {
         StringBuilder receipt = new StringBuilder();
+        final char TAB = '\t';
+        final char LINEFEED = '\n';
 
         receipt.append("======Printing Orders======\n")
                 .append(order.getCustomerName())
@@ -26,18 +28,18 @@ public class OrderReceipt {
         double salesTax;
 
         for (LineItem lineItem : order.getLineItems()) {
-            receipt.append(lineItem.getDescription()).append('\t')
-                    .append(lineItem.getPrice()).append('\t')
-                    .append(lineItem.getQuantity()).append('\t')
-                    .append(lineItem.totalAmount()).append('\n');
+            receipt.append(lineItem.getDescription()).append(TAB)
+                    .append(lineItem.getPrice()).append(TAB)
+                    .append(lineItem.getQuantity()).append(TAB)
+                    .append(lineItem.totalAmount()).append(LINEFEED);
 
             salesTax = lineItem.totalAmount() * taxRate;
             totalSaleTax += salesTax;
             total += lineItem.totalAmount() + salesTax;
         }
 
-        receipt.append("Sales Tax").append('\t').append(totalSaleTax)
-                .append("Total Amount").append('\t').append(total);
+        receipt.append("Sales Tax").append(TAB).append(totalSaleTax)
+                .append("Total Amount").append(TAB).append(total);
         return receipt.toString();
     }
 }
