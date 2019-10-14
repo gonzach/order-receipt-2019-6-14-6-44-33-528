@@ -17,25 +17,24 @@ public class OrderReceipt {
         StringBuilder receipt = new StringBuilder();
         final char TAB = '\t';
         final char LINEFEED = '\n';
-
-        receipt.append("======Printing Orders======\n")
-                .append(order.getCustomerName())
-                .append(order.getCustomerAddress());
-
         double taxRate = 0.10;
         double totalSaleTax = 0.0;
         double total = 0.0;
         double salesTax;
 
-        for (LineItem lineItem : order.getLineItems()) {
-            receipt.append(lineItem.getDescription()).append(TAB)
-                    .append(lineItem.getPrice()).append(TAB)
-                    .append(lineItem.getQuantity()).append(TAB)
-                    .append(lineItem.totalAmount()).append(LINEFEED);
+        receipt.append("======Printing Orders======\n")
+                .append(order.getCustomerName())
+                .append(order.getCustomerAddress());
 
-            salesTax = lineItem.totalAmount() * taxRate;
+        for (OrderedItem orderedItem : order.getLineItems()) {
+            receipt.append(orderedItem.getDescription()).append(TAB)
+                    .append(orderedItem.getPrice()).append(TAB)
+                    .append(orderedItem.getQuantity()).append(TAB)
+                    .append(orderedItem.totalAmount()).append(LINEFEED);
+
+            salesTax = orderedItem.totalAmount() * taxRate;
             totalSaleTax += salesTax;
-            total += lineItem.totalAmount() + salesTax;
+            total += orderedItem.totalAmount() + salesTax;
         }
 
         receipt.append("Sales Tax").append(TAB).append(totalSaleTax)
