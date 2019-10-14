@@ -15,12 +15,8 @@ public class OrderReceipt {
 
     public String printReceipt() {
         StringBuilder receipt = new StringBuilder();
-        final char TAB = '\t';
-        final char LINEFEED = '\n';
-        double taxRate = 0.10;
-        double totalSaleTax = 0.0;
-        double total = 0.0;
-        double salesTax;
+        final char TAB = '\t', LINEFEED = '\n';
+        double taxRate = 0.10, totalSaleTax = 0.0, total = 0.0, salesTax;
 
         receipt.append("======Printing Orders======\n")
                 .append(order.getCustomerName())
